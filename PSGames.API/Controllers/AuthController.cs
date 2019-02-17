@@ -30,9 +30,6 @@ namespace PSGames.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
-            
             if (await _repo.UserExistsAsync(userForRegisterDto.Username))
             {
                 return BadRequest("Username already exists");
@@ -40,7 +37,9 @@ namespace PSGames.API.Controllers
             
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+                CreatedDate = userForRegisterDto.CreatedDate,
+                LastActiveDate = userForRegisterDto.LastActiveDate
             };
 
             var createdUser = await _repo.RegisterAsync(userToCreate, userForRegisterDto.Password);

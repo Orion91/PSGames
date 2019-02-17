@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace PSGames.API.Models
 {
     public class Platform
@@ -6,5 +8,6 @@ namespace PSGames.API.Models
         public string ShortName { get; set; }
         public string FullName { get; set; }
         public string IconUrl { get; set; }
+        public ICollection<Game> Games { get; set; }
     }
 }

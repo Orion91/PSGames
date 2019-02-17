@@ -21,22 +21,24 @@ export class RegisterComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, {validator: this.passwordMatchValidator});
   }
 
   passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('confirmPassword').value ? false : {'mismatch': true};
+    return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
   }
 
   register() {
+    if (this.registerForm.valid) {
+      this.model = Object.assign({}, this.registerForm.value);
+    }
     this.authService.register(this.model).subscribe(() => {
       console.log('User registered successfully');
     }, error => {
       console.log(error);
     });
-    console.log(this.model);
   }
 
   cancel() {

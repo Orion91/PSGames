@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BsDropdownModule } from 'ngx-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -14,6 +16,7 @@ import { GameLibraryComponent } from './game-library/game-library.component';
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_services/user.service';
 
 @NgModule({
    declarations: [
@@ -30,11 +33,13 @@ import { AuthGuard } from './_guards/auth.guard';
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
       AuthService,
-      AuthGuard
+      AuthGuard,
+      UserService
    ],
    bootstrap: [
       AppComponent

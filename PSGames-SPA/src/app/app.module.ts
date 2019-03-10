@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 import { AppComponent } from './app.component';
@@ -13,10 +14,15 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { UserGameLibraryComponent } from './user-game-library/user-game-library.component';
 import { GameLibraryComponent } from './game-library/game-library.component';
-import { ProfileListComponent } from './profile-list/profile-list.component';
+import { ProfileListComponent } from './profiles/profile-list/profile-list.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
+import { ProfileCardComponent } from './profiles/profile-card/profile-card.component';
+
+export function tokenGetter () {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -26,7 +32,8 @@ import { UserService } from './_services/user.service';
       RegisterComponent,
       UserGameLibraryComponent,
       GameLibraryComponent,
-      ProfileListComponent
+      ProfileListComponent,
+      ProfileCardComponent
    ],
    imports: [
       BrowserModule,
@@ -34,7 +41,14 @@ import { UserService } from './_services/user.service';
       FormsModule,
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AuthService,

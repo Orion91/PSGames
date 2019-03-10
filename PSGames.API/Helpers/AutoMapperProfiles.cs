@@ -9,6 +9,8 @@ namespace PSGames.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>(); 
+            CreateMap<Platform, PlatformForGameDto>();
+            CreateMap<Game, GameForListDto>();
         }
     }
 } 

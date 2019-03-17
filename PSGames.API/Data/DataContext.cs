@@ -10,8 +10,14 @@ namespace PSGames.API.Data
             
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserGameLibrary>().HasKey(ugl => new {ugl.UserId, ugl.GameId});
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Platform> Platforms { get; set; }
+        public DbSet<UserGameLibrary> UsersGameLibraries { get; set; }
     }
 }

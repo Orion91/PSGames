@@ -12,13 +12,15 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { UserGameLibraryComponent } from './user-game-library/user-game-library.component';
-import { GameLibraryComponent } from './game-library/game-library.component';
+import { UserGameLibraryComponent } from './games/user-game-library/user-game-library.component';
+import { GameLibraryComponent } from './games/game-library/game-library.component';
 import { ProfileListComponent } from './profiles/profile-list/profile-list.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { ProfileCardComponent } from './profiles/profile-card/profile-card.component';
+import { GameCardComponent } from './games/game-card/game-card.component';
+import { GameService } from './_services/game.service';
 
 export function tokenGetter () {
    return localStorage.getItem('token');
@@ -32,6 +34,7 @@ export function tokenGetter () {
       RegisterComponent,
       UserGameLibraryComponent,
       GameLibraryComponent,
+      GameCardComponent,
       ProfileListComponent,
       ProfileCardComponent
    ],
@@ -53,7 +56,8 @@ export function tokenGetter () {
    providers: [
       AuthService,
       AuthGuard,
-      UserService
+      UserService,
+      GameService
    ],
    bootstrap: [
       AppComponent

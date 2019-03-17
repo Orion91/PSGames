@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PSGames.API.Models
 {
@@ -12,5 +13,6 @@ namespace PSGames.API.Models
         public string AvatarUrl { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastActiveDate { get; set; }
+        public ICollection<UserGameLibrary> UserGameLibraries { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PSGames.API.Models;
@@ -27,9 +28,27 @@ namespace PSGames.API.Data
             return game;
         }
 
-        public Task<IEnumerable<Game>> GetUserGames()
+        public async Task<UserLibraryGame> GetUserGame(int userId, int gameId)
         {
-            throw new System.NotImplementedException();
+            var userLibraryGame = await _context.UsersGameLibraries
+                .Include(g => g.Game)
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(ugl => ugl.UserId == userId && ugl.GameId == gameId);
+
+            return userLibraryGame;
+        }
+
+        public async Task<IEnumerable<Game>> GetUserGames(int userId)
+        {
+            var userLibraryGames = _context.UsersGameLibraries
+                .Where(ulg => ulg.UserId == userId).Select(i => i.GameId);
+
+            var userGames = await _context.Games
+                .Include(p => p.Platform)
+                .Where(g => userLibraryGames.Contains(g.Id))
+                .ToListAsync();
+
+            return userGames;
         }
     }
 }

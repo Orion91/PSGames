@@ -41,6 +41,7 @@ namespace PSGames.API
             services.AddCors();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGameRepository, GameRepository>();

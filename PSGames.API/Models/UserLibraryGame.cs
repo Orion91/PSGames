@@ -1,6 +1,6 @@
 namespace PSGames.API.Models
 {
-    public class UserGameLibrary
+    public class UserLibraryGame
     {
         public int UserId { get; set; }
         public User User { get; set; }

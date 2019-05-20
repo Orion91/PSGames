@@ -8,16 +8,25 @@ import { Game } from '../_models/game';
   providedIn: 'root'
 })
 export class GameService {
-  baseUrl = environment.apiUrl;
+  baseUrl = environment.apiUrl + 'games/';
 
 constructor(private http: HttpClient) { }
 
 getAllGames(): Observable<Game[]> {
-  return this.http.get<Game[]>(this.baseUrl + 'games');
+  return this.http.get<Game[]>(this.baseUrl);
 }
 
 getGame(id): Observable<Game> {
-  return this.http.get<Game>(this.baseUrl + 'games/' + id);
+  return this.http.get<Game>(this.baseUrl + id);
+}
+
+getUserGameLibrary(id): Observable<Game[]> {
+  return this.http.get<Game[]>(this.baseUrl + 'library/' + id);
+}
+
+addGameToUserLibrary(userId: number, gameId: number) {
+  console.log(this.baseUrl + 'library/' + userId + '/add/' + gameId);
+  return this.http.post(this.baseUrl + 'library/' + userId + '/add/' + gameId, {});
 }
 
 }

@@ -21,6 +21,8 @@ import { UserService } from './_services/user.service';
 import { ProfileCardComponent } from './profiles/profile-card/profile-card.component';
 import { GameCardComponent } from './games/game-card/game-card.component';
 import { GameService } from './_services/game.service';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { GameDetailComponent } from './games/game-detail/game-detail.component';
 
 export function tokenGetter () {
    return localStorage.getItem('token');
@@ -35,6 +37,7 @@ export function tokenGetter () {
       UserGameLibraryComponent,
       GameLibraryComponent,
       GameCardComponent,
+      GameDetailComponent,
       ProfileListComponent,
       ProfileCardComponent
    ],
@@ -57,7 +60,8 @@ export function tokenGetter () {
       AuthService,
       AuthGuard,
       UserService,
-      GameService
+      GameService,
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent

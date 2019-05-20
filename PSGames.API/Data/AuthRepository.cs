@@ -42,8 +42,8 @@ namespace PSGames.API.Data
                         return false;
                     }
                 }
-                return true;
             }
+            return true;
         }
 
         public async Task<User> RegisterAsync(User user, string password)
@@ -71,7 +71,7 @@ namespace PSGames.API.Data
 
         public async Task<bool> UserExistsAsync(string username)
         {
-            if (await _context.Users.AnyAsync(x => x.Username == username))
+            if (await _context.Users.AnyAsync(x => x.Username.ToLower() == username.ToLower()))
             {
                 return true;
             }

@@ -4,6 +4,7 @@ import { GameLibraryComponent } from './games/game-library/game-library.componen
 import { UserGameLibraryComponent } from './games/user-game-library/user-game-library.component';
 import { ProfileListComponent } from './profiles/profile-list/profile-list.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { GameDetailComponent } from './games/game-detail/game-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,6 +14,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'games', component: GameLibraryComponent },
+            { path: 'games/:id', component: GameDetailComponent },
             { path: 'userLibrary', component: UserGameLibraryComponent },
             { path: 'profiles', component: ProfileListComponent }
         ]

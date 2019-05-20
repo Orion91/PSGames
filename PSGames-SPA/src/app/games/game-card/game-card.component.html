@@ -1,13 +1,15 @@
 <div class="card mb-4">
     <div class="card-img-wrapper">
-      <img class="card-img-top" src="https://www.playhit.cz/wp-content/uploads/2013/02/Sony-playstation-logo.jpg" alt="{{game.title}}">
+      <img class="card-img-top" src="{{game.gameTitleImageUrl}}" alt="{{game.title}}">
       <ul class="list-inline game-icons animate text-center">
-        <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-gamepad"></i></button></li>
-        <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-plus"></i></button></li>
-        <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></li>
+        <li class="list-inline-item"><button class="btn btn-primary"
+          [routerLink]="['/games/', game.id]"><i class="fa fa-gamepad"></i></button></li>
+        <li class="list-inline-item"><button class="btn btn-primary"
+          (click)="addGameToUserLibrary()"><i class="fa fa-plus"></i></button></li>
+        <!-- <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></li> -->
       </ul>
     </div>
     <div class="card-body p-1">
-      <h6 class="card-title text-center mb-1"><i class="fa fa-user"></i> {{game.title}}</h6>
+      <h6 class="card-title text-center mb-1">{{game.title}}</h6>
     </div>
   </div>
